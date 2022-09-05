@@ -8,7 +8,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, "build"),
-    filename: "index.js",
+    filename: '[name].js',
   },
   resolve: {
     extensions: [".ts", ".js"],
@@ -24,6 +24,26 @@ module.exports = {
       {
         test: /\.ts$/,
         loader: "ts-loader",
+      },
+      {
+        test: /\.scss/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              url: false,
+              sourceMap: true,
+              importLoaders: 2
+            }
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true
+            },
+          },
+        ],
       },
     ],
   },
